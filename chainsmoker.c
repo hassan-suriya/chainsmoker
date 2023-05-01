@@ -29,28 +29,26 @@ void *agent (){
 		exit(0);
 	}
 	sleep(1);
-	switch (number){
-		case 0: 
-			sem_post (&match); 
-			sem_post (&paper);
-			syscall(333,"Agent has put match and paper on the table\n");
-			printf("Smoking %d time\n", sm++);
-			s++;
-           	break;
-           	case 1: 
-			sem_post (&match);
-                	sem_post (&tobacco);
-			syscall(333,"Agent has put match and tobacco on the table\n");
-			printf("Smoking %d time\n", sm++);
-			p++;
-           	break;
-          	case 2: 
-			sem_post (&paper);
-                	sem_post (&tobacco);
-			syscall(333,"Agent has put paper and tobacco on the table\n");
-			printf("Smoking %d time\n", sm++);
-			m++;
-           	break;
+	if (number == 0){
+		sem_post (&match); 
+		sem_post (&paper);
+		syscall(333,"Agent has put match and paper on the table\n");
+		printf("Smoking %d time\n", sm++);
+		s++;
+	}
+	else if (number == 1){
+		sem_post (&match);
+		sem_post (&tobacco);
+		syscall(333,"Agent has put match and tobacco on the table\n");
+		printf("Smoking %d time\n", sm++);
+		p++;
+	}
+	else if (number == 2){
+		sem_post (&paper);
+		sem_post (&tobacco);
+		syscall(333,"Agent has put paper and tobacco on the table\n");
+		printf("Smoking %d time\n", sm++);
+		m++;
 	}
 	sem_wait (&more_needed); 
 	i++;
